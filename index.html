@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arslan's Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: white;
+            overflow-x: hidden;
+            background: linear-gradient(-45deg, #000000, #2A1A2A, #1A2A22, #000000);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links > li {
+            position: relative;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            opacity: 0.9;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Dropdown menu styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            min-width: 200px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+            top: 100%;
+            left: 0;
+            padding: 0.5rem 0;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 0.7rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        main {
+            padding-top: 80px;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 60px 50px;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 600px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px 35px;
+            color: white;
+            text-decoration: none;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-content {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 25px;
+            padding: 60px 50px;
+            margin: 40px 0;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .section-content:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .about-text {
+            font-size: 1.2rem;
+            text-align: center;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .skill-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .skill-card p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .project-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-content {
+            padding: 2.5rem;
+        }
+
+        .project-image {
+            height: 220px;
+            background: linear-gradient(135deg, rgba(60, 78, 242, 0.966), rgba(4, 160, 27, 0.888));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .project-content h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .project-content p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .contact-content {
+            text-align: center;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .publications-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .publication-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .publication-item h3 {
+            color: white;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .publication-item p {
+            opacity: 0.9;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            opacity: 0.9;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.9);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 1rem;
+                border-radius: 0 0 10px 10px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .dropdown-content {
+                position: static;
+                display: block;
+                background: rgba(255, 255, 255, 0.1);
+                margin-left: 1rem;
+                margin-top: 0.5rem;
+            }
+            
+            .hero-content {
+                padding: 40px 30px;
+                margin: 20px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-content {
+                padding: 40px 30px;
+                margin: 20px;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">ارسلان امجد</div>
+            <button class="mobile-menu-toggle">☰</button>
+            <ul class="nav-links">
+                <li><a href="#about">About Me</a></li>
+                <li class="dropdown">
+                    <a href="#experience">Experience</a>
+                    <div class="dropdown-content">
+                        <a href="#robotics">Robotics</a>
+                        <a href="#ai">Artificial Intelligence</a>
+                        <a href="#embedded">Embedded Systems</a>
+                    </div>
+                </li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#resume">Resume/CV</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="about" class="hero">
+            <div class="container">
+                <div class="section-content">
+                    <h1 class="hero-content">Hi, I'm Arslan Amjad</h1>
+                    <div class="about-text">
+                        <p>I'm a graduate student in Electrical & Computer Engineering at <a href="https://lums.edu.pk/" style="color: #4A90E2;">LUMS</a>.</p>
+                        <p>I'm passionate about Robotics, AI, and Embedded Systems. As a dedicated engineer with a deep passion for cutting-edge technology, my expertise spans robotics, artificial intelligence, and embedded systems, where I specialize in creating innovative solutions that bridge the gap between hardware and software.</p>
+                        <p>With a strong foundation in both theoretical knowledge and practical application, I excel at tackling complex challenges and bringing ideas to life through code and circuitry.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <div class="container">
+                <div class="section-content">
+                    <h2>My Experience</h2>
+                    <div class="skills-grid">
+                        <div class="skill-card" id="robotics">
+                            <h3>🤖 Robotics</h3>
+                            <p>Autonomous systems, robot control, sensor integration, and mechanical design for various robotic applications.</p>
+                        </div>
+                        <div class="skill-card" id="ai">
+                            <h3>🧠 Artificial Intelligence</h3>
+                            <p>Machine learning, computer vision, neural networks, and AI algorithm development for intelligent systems.</p>
+                        </div>
+                        <div class="skill-card" id="embedded">
+                            <h3>⚡ Embedded Systems</h3>
+                            <p>Microcontroller programming, IoT development, real-time systems, and hardware/software integration.</p>
+                        </div>
+                        <div class="skill-card">
+                            <h3>💻 Programming</h3>
+                            <p>Python, C/C++, ROS, Arduino, Raspberry Pi, and various frameworks for robotics and AI development.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <div class="section-content">
+                    <h2>Featured Projects</h2>
+                    <div class="projects-grid">
+                        <div class="project-card">
+                            <div class="project-image">Autonomous Robot</div>
+                            <div class="project-content">
+                                <h3>Navigation Robot</h3>
+                                <p>Developed an autonomous navigation system using computer vision and sensor fusion technology for obstacle avoidance and path planning in dynamic environments.</p>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-image">AI Vision System</div>
+                            <div class="project-content">
+                                <h3>Smart Vision AI</h3>
+                                <p>Created a real-time object detection and classification system using deep learning techniques for industrial automation applications.</p>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-image">IoT Device</div>
+                            <div class="project-content">
+                                <h3>Smart Home System</h3>
+                                <p>Built an integrated IoT platform for smart home automation featuring voice control, mobile app interface, and cloud-based connectivity.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="publications">
+            <div class="container">
+                <div class="section-content">
+                    <h2>Publications</h2>
+                    <div class="publications-list">
+                        <div class="publication-item">
+                            <h3>Advanced Robotics Control Systems</h3>
+                            <p><strong>Conference:</strong> International Conference on Robotics and Automation (ICRA) 2024</p>
+                            <p>A comprehensive study on autonomous navigation algorithms for mobile robots in complex environments.</p>
+                        </div>
+                        <div class="publication-item">
+                            <h3>Machine Learning in Embedded Systems</h3>
+                            <p><strong>Journal:</strong> IEEE Transactions on Industrial Electronics, 2024</p>
+                            <p>Implementation of lightweight neural networks on resource-constrained embedded platforms for real-time processing.</p>
+                        </div>
+                        <div class="publication-item">
+                            <h3>IoT-Based Smart Automation</h3>
+                            <p><strong>Conference:</strong> International IoT Conference 2023</p>
+                            <p>Design and development of scalable IoT architectures for industrial automation and smart city applications.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="resume">
+            <div class="container">
+                <div class="section-content">
+                    <div class="contact-content">
+                        <h2>Resume/CV</h2>
+                        <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
+                            Download my complete resume to learn more about my experience, education, and achievements.
+                        </p>
+                        <div class="contact-buttons">
+                            <a href="#" class="btn">Download Resume (PDF)</a>
+                            <a href="#" class="btn">View Online CV</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <div class="section-content">
+                    <div class="contact-content">
+                        <h2>Let's Connect!</h2>
+                        <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
+                            I'm always excited to explore new opportunities, collaborate on innovative projects, or share insights about robotics and AI.
+                        </p>
+                        <div class="contact-buttons">
+                            <a href="mailto:amjadarslan12@gmail.com" class="btn">Send Email</a>
+                            <a href="https://www.linkedin.com/in/arslan-amjad12" class="btn">LinkedIn</a>
+                            <a href="https://github.com/arslan12" class="btn">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Arslan Amjad. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileToggle = document.querySelector('.mobile-menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetElement = document.querySelector(this.getAttribute('href'));
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                // Close mobile menu after clicking
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Header background opacity change on scroll
+        window.addEventListener('scroll', () => {
+            const headerElement = document.querySelector('header');
+            if (window.scrollY > 100) {
+                headerElement.style.background = 'rgba(0, 0, 0, 0.4)';
+            } else {
+                headerElement.style.background = 'rgba(0, 0, 0, 0.2)';
+            }
+        });
+
+        // Intersection observer for section animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const intersectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Apply fade-in effect to section content
+        document.querySelectorAll('.section-content').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'all 0.8s ease-out';
+            intersectionObserver.observe(element);
+        });
+    </script>
+</body>
+</html>
